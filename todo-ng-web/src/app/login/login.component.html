@@ -1,0 +1,21 @@
+
+<h1>Login</h1>
+
+
+<div class="container">
+<!-- [(ngModel)] - data binding- gets data from the user, 
+    you also need to add "FormsModule" to app.module -->
+<div class="alert alert-danger" *ngIf='invalidLogin'>{{errorMessage}}</div>
+
+
+<div>
+    User name : <input type="text" name="username" [(ngModel)]="username">
+    Password : <input type="password" name="password" [(ngModel)]="password">
+
+    <!-- this is data binding -->
+    <!-- Username : {{username}} -->
+    <!-- This is event binding -->
+    <button class="btn btn-success" (click)=handleLogin()>Login</button>
+</div>
+
+</div>
