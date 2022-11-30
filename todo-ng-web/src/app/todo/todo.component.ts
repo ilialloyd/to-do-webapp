@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Todo } from '../lists-todos/lists-todos.component';
 import { TodoDataService } from '../service/data/todo-data.service';
 
@@ -15,15 +15,42 @@ export class TodoComponent implements OnInit {
 
   constructor(
     private todoService: TodoDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.todo = new Todo(1,'',false,new Date());
-    this.todoService.retrieveTodo('ilham',this.id).subscribe(
-     data =>this.todo =data
-    )
+    this.todo = new Todo(this.id, '', false, new Date()); // to prevent direct empty upload
+    if (this.id != -1) {// when it is new todo we dont need to call retrieveTodo
+      this.todoService.retrieveTodo('ilham', this.id).subscribe(
+        data => this.todo = data
+      )
+    }
+  }
+
+
+  saveTodo() {
+    if (this.id === -1) {
+      //create todo
+      this.todoService.createTodo('ilham', this.todo)
+        .subscribe(
+          data => {
+            console.log(data)
+            //back to todos list after update
+            this.router.navigate(['todos'])
+          }
+        )
+    } else {
+      this.todoService.updateTodo('ilham', this.id, this.todo)
+        .subscribe(
+          data => {
+            console.log(data)
+            //back to todos list after update
+            this.router.navigate(['todos'])
+          }
+        )
+    }
   }
 
 }

@@ -1,8 +1,6 @@
 package com.example.restfulwebservice.todo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -10,6 +8,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 public class Todo {
 
     private long id;
@@ -18,6 +17,9 @@ public class Todo {
     private Date targetDate;
     private boolean isDone;
 
+    protected Todo(){
+
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

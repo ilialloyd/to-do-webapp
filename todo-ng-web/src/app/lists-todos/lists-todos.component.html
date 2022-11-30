@@ -3,28 +3,34 @@
 <div class="alert alert-success" *ngIf='message'>{{message}}</div>
 
 <div class="container">
-<table class="table ">
-    <thead>
-        <tr>
-            <th>description</th>
-            <th>Target Date</th>
-            <th>Is Completed?</th>
-            <th>Update</th>
-            <th>Delete</th>
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Target Date</th>
+                <th>Is Completed?</th>
+                <th>Update</th>
+                <th>Delete</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        <!-- same as for(Todo todo:todos) 
+            </tr>
+        </thead>
+        <tbody>
+            <!-- same as for(Todo todo:todos) 
           targetDate | date  - we manipulate(farmatting) date format - called pipe as well
         you can do things to pipe uppercase as well - description | uppercase-->
-        <tr *ngFor="let todo of todos">
-            <td>{{todo.description}}</td>
-            <td>{{todo.targetDate | date | uppercase }}</td>
-            <td >{{todo.done}}</td>
-            <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
-            <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
-        </tr>
-    </tbody>
-</table>
+            <tr *ngFor="let todo of todos">
+                <td>{{todo.description}}</td>
+                <td>{{todo.targetDate | date | uppercase }}</td>
+                <td>{{todo.done}}</td>
+                <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
+                <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div >
+        <button (click)="addTodo()" class="btn btn-success" type="button">Add</button>
+    </div>
+
+
 </div>

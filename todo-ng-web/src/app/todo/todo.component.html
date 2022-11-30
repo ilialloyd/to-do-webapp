@@ -1,18 +1,29 @@
 <H1>Todo</H1>
 <div class="container">
-    <fieldset class="form-group">
-        <label for="">Description</label>
-        <input type="text" [(ngModel)]="todo.description" class="form-control" name="descrioption" required="required">
-    </fieldset>
+    <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid values</div>
+    <div class="alert alert-warning" *ngIf="todoForm.dirty && targetDate.invalid">Enter valid date</div>
+    <!-- <div class="alert alert-warning" *ngIf="todoForm.dirty && description.invalid">Enter at least 5 characters</div> -->
 
-    <fieldset class="form-group"> 
-        <label for="">Target Date</label>
-    <input type="date"
-      [ngModel]="todo.targetDate | date:'yyyy-MM-dd' "
-      (ngModelChange)="todo.targetDate=$event"
-       class="form-control" name="targetDate" required="required">
-</fieldset>
+    <!-- a todoForm.dirty- when I start typing then show validation  -->
+    <!-- Below line: if form is not empty then submit. to validateand prevent empty description to enter to the list  -->
+    <form (ngSubmit)="!todoForm.invalid && saveTodo()" #todoForm="ngForm">
+        <fieldset class="form-group">
+            <label for="">Description</label>
+            <input type="text" #description="ngModel" 
+                   [(ngModel)]="todo.description" class="form-control"
+                   name="descrioption" required="required" minlength="5">
+        </fieldset>
 
-<button class="btn btn-success">Save</button>  
-<!-- (click)="saveTodo()" -->
+        <fieldset class="form-group">
+            <label for="">Target Date</label>
+            <!-- [ngModel] -property binding , (ngModelChange)- event binding  -->
+            <input type="date" #targetDate="ngModel" 
+                   [ngModel]="todo.targetDate | date:'yyyy-MM-dd' "
+                   (ngModelChange)="todo.targetDate=$event" class="form-control" name="targetDate" required="required">
+        </fieldset>
+
+        <button type="submit" class="btn btn-success">Save</button>
+
+    </form>
+    <!--Enter key in action <button (click)="saveTodo()"   in form tag instead of button     <form (ngSubmit)="saveTodo()">  -->
 </div>

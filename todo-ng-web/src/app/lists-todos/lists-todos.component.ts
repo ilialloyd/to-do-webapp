@@ -57,6 +57,11 @@ export class ListsTodosComponent implements OnInit {
     
   }
 
+
+  addTodo(){
+    this.router.navigate(['todos',-1]);
+  }
+
 }
 
 //new Todo class and in constructor we define the types
