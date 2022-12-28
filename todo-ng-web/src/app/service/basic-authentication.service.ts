@@ -1,6 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { API_URL } from '../app.constants';
+
+
+export const TOKEN ='token'
+export const AUTHENTICATED_USER = 'authenticatedUser'
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,68 +15,68 @@ export class BasicAuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  //authanticating logs
-  authenticate(username: string, password: string) {
-    // console.log("before"+ this.isUserLoggedIn());
-    if (username === 'lightacademy' && password === 'dummy') {
-      sessionStorage.setItem('authenticatedUser', username);
-      // console.log("after"+ this.isUserLoggedIn());
+  //hardcoded auth
+  // authenticate(username: string, password: string) {
+  //   // console.log("before"+ this.isUserLoggedIn());
+  //   if (username === 'lightacademy' && password === 'dummy') {
+  //     sessionStorage.setItem('authenticatedUser', username);
+  //     // console.log("after"+ this.isUserLoggedIn());
 
-      return true;
-    }
-    return false;
-  }
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
 
   execudeAuthenticationService(username: string, password: string) {
-   
+    //handling auth
     let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
 
-     let headers = new HttpHeaders(
-      { Authorization: basicAuthHeaderString 
+    let headers = new HttpHeaders(
+      {
+        Authorization: basicAuthHeaderString
       })
 
-//this execute when someone subscribe it
+    //this execute when someone subscribe it
     return this.http
-    .get<AuthenticationBean>(`http://localhost:8080/basicauth`,{headers})
-    .pipe(
+      .get<AuthenticationBean>(`${API_URL}/basicauth`, { headers })
+      .pipe(
         map(
-          data=>{
-            sessionStorage.setItem('authenticatedUser', username);
+          data => {
+            sessionStorage.setItem(AUTHENTICATED_USER, username);
+            sessionStorage.setItem(TOKEN, basicAuthHeaderString);
             return data;
           }
         )
       )
-    
-        
+
+
   }
 
-  /* Access to XMLHttpRequest at 'http://localhost:8080/hello-world/path-variable/lightacademy'
-    from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin'
-    header is present on the requested resource.
-  
-    This is error that after adding basic authentication you cant get the data, so you need to solve security issue first
-   */
-  // createBasicAuthenticationHttpHeader() {
-  //   let username = 'lightacademy';
-  //   let password = 'dummy'
-  //   let basicAuthenticationString = 'Basic ' + window.btoa(username + ':' + password);
-  //   return basicAuthenticationString;
-  // }
+  //utility methods
+
+
+  getAuthenticatedUser() {
+    return sessionStorage.getItem(AUTHENTICATED_USER)
+  }
+
+  getAuthenticatedToken() {
+   return this.getAuthenticatedUser() ? sessionStorage.getItem(TOKEN) : null;
+  }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('authenticatedUser')
+    let user = sessionStorage.getItem(AUTHENTICATED_USER)
     return !(user === null)
   }
 
-  logout(){
-
-    sessionStorage.removeItem('authenticatedUser')
+  logout() {
+    sessionStorage.removeItem(AUTHENTICATED_USER)
+    sessionStorage.getItem(TOKEN)
   }
 
 }
 
 
-export class AuthenticationBean{
-  constructor(public message: string){}
+export class AuthenticationBean {
+  constructor(public message: string) { }
 }

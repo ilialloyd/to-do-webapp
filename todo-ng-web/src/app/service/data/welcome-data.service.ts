@@ -26,14 +26,15 @@ export class WelcomeDataService {
   }
 
   execudeHelloWorldBeanServiceWithPathVariable(name: string) {
-    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
-    let headers = new HttpHeaders(
-      { Authorization: basicAuthHeaderString 
-      })
+    // let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+    // let headers = new HttpHeaders(
+    //   { Authorization: basicAuthHeaderString 
+    //   })
 
     return this.http.get<HelloWorldBean>(
       `http://localhost:8080/hello-world/path-variable/${name}`,
-      {headers});
+    //  {headers}
+      );
   }
 
   /* Access to XMLHttpRequest at 'http://localhost:8080/hello-world/path-variable/lightacademy'
@@ -42,12 +43,12 @@ export class WelcomeDataService {
   
     This is error that after adding basic authentication you cant get the data, so you need to solve security issue first
    */
-  createBasicAuthenticationHttpHeader() {
-    let username = 'lightacademy';
-    let password = 'dummy'
-    let basicAuthenticationString = 'Basic ' + window.btoa(username + ':' + password);
-    return basicAuthenticationString;
-  }
+  // createBasicAuthenticationHttpHeader() {
+  //   let username = 'lightacademy';
+  //   let password = 'dummy'
+  //   let basicAuthenticationString = 'Basic ' + window.btoa(username + ':' + password);
+  //   return basicAuthenticationString;
+  // }
 
 }
 
