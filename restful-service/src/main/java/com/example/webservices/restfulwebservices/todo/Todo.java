@@ -1,6 +1,12 @@
-package com.example.restfulwebservice.todo;
+package com.example.webservices.restfulwebservices.todo;
 
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
 import java.util.Objects;
@@ -9,17 +15,21 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @ToString
+@Entity
 public class Todo {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    private long id;
     private String username;
     private String description;
     private Date targetDate;
     private boolean isDone;
 
-    protected Todo(){
+    protected Todo() {
 
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

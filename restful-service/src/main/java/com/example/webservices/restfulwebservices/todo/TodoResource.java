@@ -1,4 +1,4 @@
-package com.example.restfulwebservice.todo;
+package com.example.webservices.restfulwebservices.todo;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
