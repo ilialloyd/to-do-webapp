@@ -1,4 +1,4 @@
-package com.example.webservices.restfulwebservices.basicAuth;
+package com.example.basicAuth;
 
 import lombok.Getter;
 import lombok.Setter;

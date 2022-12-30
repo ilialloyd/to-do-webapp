@@ -1,4 +1,4 @@
-package com.example.jwt;
+package com.example.webservices.restfulwebservices.jwt;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

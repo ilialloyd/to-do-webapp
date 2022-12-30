@@ -1,4 +1,4 @@
-package com.example.jwt;
+package com.example.webservices.restfulwebservices.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

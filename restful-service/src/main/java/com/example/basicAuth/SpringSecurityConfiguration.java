@@ -1,4 +1,4 @@
-package com.example.webservices.restfulwebservices.basicAuth;
+package com.example.basicAuth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 
 
-@EnableWebSecurity
-@Configuration
+//@EnableWebSecurity
+//@Configuration
 public class SpringSecurityConfiguration  {
 
     @Bean

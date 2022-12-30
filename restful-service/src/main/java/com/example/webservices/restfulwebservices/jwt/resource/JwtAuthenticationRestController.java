@@ -1,6 +1,6 @@
-package com.example.jwt.resource;
-import com.example.jwt.JwtUserDetails;
-import com.example.jwt.JwtTokenUtil;
+package com.example.webservices.restfulwebservices.jwt.resource;
+import com.example.webservices.restfulwebservices.jwt.JwtUserDetails;
+import com.example.webservices.restfulwebservices.jwt.JwtTokenUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

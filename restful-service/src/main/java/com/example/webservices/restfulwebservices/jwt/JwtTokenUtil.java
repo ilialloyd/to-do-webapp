@@ -1,4 +1,4 @@
-package com.example.jwt;
+package com.example.webservices.restfulwebservices.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;
@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +47,13 @@ public class JwtTokenUtil implements Serializable {
         return claimsResolver.apply(claims);
     }
 
+//    original
+//    private Claims getAllClaimsFromToken(String token) {
+//        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+//    }
+
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(secret.getBytes(Charset.forName("UTF-8"))).parseClaimsJws(token.replace("{", "").replace("}","")).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -65,12 +71,19 @@ public class JwtTokenUtil implements Serializable {
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
-    private String doGenerateToken(Map<String, Object> claims, String subject) {
-        final Date createdDate = clock.now();
-        final Date expirationDate = calculateExpirationDate(createdDate);
+//    original
+//    private String doGenerateToken(Map<String, Object> claims, String subject) {
+//        final Date createdDate = clock.now();
+//        final Date expirationDate = calculateExpirationDate(createdDate);
+//
+//        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(createdDate)
+//                .setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, secret).compact();
+//    }
 
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(createdDate)
-                .setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, secret).compact();
+    private String doGenerateToken(Map<String, Object> claims, String subject) {
+        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
+                .signWith(SignatureAlgorithm.HS512, secret.getBytes(Charset.forName("UTF-8"))).compact();
     }
 
     public Boolean canTokenBeRefreshed(String token) {

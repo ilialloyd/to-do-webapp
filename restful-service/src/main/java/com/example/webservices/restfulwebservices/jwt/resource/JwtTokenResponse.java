@@ -1,4 +1,4 @@
-package com.example.jwt.resource;
+package com.example.webservices.restfulwebservices.jwt.resource;
 
 import java.io.Serializable;
 

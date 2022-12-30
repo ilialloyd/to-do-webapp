@@ -1,4 +1,4 @@
-package com.example.jwt;
+package com.example.webservices.restfulwebservices.jwt;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
