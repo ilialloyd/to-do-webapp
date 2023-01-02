@@ -1,8 +1,6 @@
 package com.example.webservices.restfulwebservices.todo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +8,10 @@ import lombok.ToString;
 
 import java.util.Date;
 import java.util.Objects;
+
+//insert into todo(id,username,description,target_date,is_done)
+//        values ( 10001,'lightacademy','learn jpa',sysdate(),false );
+
 
 @Getter
 @Setter
