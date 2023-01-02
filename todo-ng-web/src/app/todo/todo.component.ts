@@ -23,7 +23,7 @@ export class TodoComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.todo = new Todo(this.id, '', false, new Date()); // to prevent direct empty upload
     if (this.id != -1) {// when it is new todo we dont need to call retrieveTodo
-      this.todoService.retrieveTodo('ilham', this.id).subscribe(
+      this.todoService.retrieveTodo('lighteducation', this.id).subscribe(
         data => this.todo = data
       )
     }
@@ -31,9 +31,9 @@ export class TodoComponent implements OnInit {
 
 
   saveTodo() {
-    if (this.id === -1) {
+    if (this.id == -1) {
       //create todo
-      this.todoService.createTodo('ilham', this.todo)
+      this.todoService.createTodo('lighteducation', this.todo)
         .subscribe(
           data => {
             console.log(data)
@@ -42,7 +42,7 @@ export class TodoComponent implements OnInit {
           }
         )
     } else {
-      this.todoService.updateTodo('ilham', this.id, this.todo)
+      this.todoService.updateTodo('lighteducation', this.id, this.todo)
         .subscribe(
           data => {
             console.log(data)
